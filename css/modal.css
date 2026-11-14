@@ -1,0 +1,1151 @@
+/* ==========================================================================
+   TRIAMDOD 10 — BIG BRIGHT CASSETTE TAPES PACKAGE SELECTION MODAL
+   Theme: Retro Y2K Mixtape & Cassette Deck (Bright Vintage Tones)
+   - Zero emojis, 100% clean vector SVG icons
+   - Authentic Cassette Tapes with corner screws, ruled paper labels, spools & tape window
+   - Interactive lift & glow selection (จิ้มเลือกตลับเทปได้ทันที)
+   - Translucent glass backdrop blurring the main page behind it
+   - Dynamic size selector (shown only for packages with shirt)
+   ========================================================================== */
+
+/* Modal Backdrop (Translucent Dim + Blur) */
+.payphone-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 2, 18, 0.62);
+  backdrop-filter: blur(14px) saturate(140%) brightness(0.85);
+  -webkit-backdrop-filter: blur(14px) saturate(140%) brightness(0.85);
+  z-index: 2300;
+  display: none !important;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  opacity: 0;
+  pointer-events: none;
+  overflow-y: auto;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.payphone-modal-backdrop.active {
+  display: flex !important;
+  opacity: 1;
+  pointer-events: auto !important;
+}
+
+/* Modal Window Container — Floating Cassette Deck Console */
+.pkg-dialog-container {
+  width: 100%;
+  max-width: 1160px;
+  margin: auto;
+  background-color: rgba(14, 6, 34, 0.84);
+  background-image: 
+    radial-gradient(circle at 18% 12%, rgba(0, 240, 255, 0.16) 0%, transparent 45%),
+    radial-gradient(circle at 82% 16%, rgba(255, 0, 127, 0.2) 0%, transparent 48%),
+    radial-gradient(circle at 50% 65%, rgba(189, 0, 255, 0.15) 0%, transparent 52%),
+    linear-gradient(180deg, rgba(22, 10, 48, 0.92) 0%, rgba(12, 5, 28, 0.96) 100%);
+  border: 1.5px solid rgba(189, 0, 255, 0.45);
+  border-radius: 22px;
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  box-shadow: 
+    0 24px 60px rgba(0, 0, 0, 0.75),
+    0 0 45px rgba(189, 0, 255, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  padding: 30px 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  color: #ffffff;
+  position: relative;
+  animation: pkgModalAppear 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes pkgModalAppear {
+  from { opacity: 0; transform: scale(0.96) translateY(18px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Modal Header */
+.pkg-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 16px;
+}
+
+.pkg-header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pkg-header-title {
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  font-size: 1.85rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: #ffffff;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9), 0 0 24px rgba(255, 255, 255, 0.2);
+}
+
+.pkg-header-role {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #a5b4fc;
+  font-family: 'IBM Plex Sans Thai', sans-serif;
+  font-weight: 500;
+}
+
+.pkg-close-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  color: #cbd5e1;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.pkg-close-btn:hover {
+  background: rgba(255, 0, 127, 0.2);
+  border-color: #ff007f;
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+/* ==========================================================================
+   BIG CASSETTE TAPES DECK GRID
+   ========================================================================== */
+.cassette-deck-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+  gap: 18px;
+  perspective: 1000px;
+}
+
+/* Single Cassette Tape Card */
+.cassette-package-card {
+  position: relative;
+  border-radius: 14px;
+  padding: 14px 14px 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  transition: 
+    transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+  box-shadow: 
+    0 10px 24px rgba(0, 0, 0, 0.6),
+    inset 0 1px 2px rgba(255, 255, 255, 0.5),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  text-align: left;
+}
+
+/* Cassette Tape Shell Color Themes (Bright Vintage / Y2K Tones) */
+.tape-white-mint {
+  background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 70%, #cbd5e1 100%);
+  border-color: #94a3b8;
+}
+
+.tape-cream-amber {
+  background: linear-gradient(180deg, #fffbeb 0%, #fef3c7 65%, #fde68a 100%);
+  border-color: #f59e0b;
+}
+
+.tape-pink-magenta {
+  background: linear-gradient(180deg, #fdf2f8 0%, #fce7f3 65%, #fbcfe8 100%);
+  border-color: #ec4899;
+}
+
+.tape-yellow-gold {
+  background: linear-gradient(180deg, #fefce8 0%, #fef08a 65%, #fde047 100%);
+  border-color: #eab308;
+}
+
+.tape-coral-pickup {
+  background: linear-gradient(180deg, #fff7ed 0%, #ffedd5 65%, #fed7aa 100%);
+  border-color: #f97316;
+}
+
+.tape-cyan-delivery {
+  background: linear-gradient(180deg, #f0fdfa 0%, #ccfbf1 65%, #99f6e4 100%);
+  border-color: #14b8a6;
+}
+
+/* Hover & Active States (Interactive Lift & Glow) */
+.cassette-package-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 18px 36px rgba(0, 0, 0, 0.65),
+    0 0 24px rgba(0, 240, 255, 0.35);
+  z-index: 10;
+}
+
+.cassette-package-card.active-pkg {
+  transform: translateY(-10px) scale(1.028);
+  border-color: #ff007f !important;
+  box-shadow: 
+    0 22px 45px rgba(0, 0, 0, 0.8),
+    0 0 32px rgba(255, 0, 127, 0.6),
+    inset 0 0 10px rgba(255, 0, 127, 0.25);
+  z-index: 12;
+}
+
+/* Recommended Cassette Card (PKG 3: 339.-) */
+.cassette-package-card.tape-recommended-card {
+  border-color: rgba(255, 0, 127, 0.65);
+  box-shadow: 
+    0 12px 28px rgba(0, 0, 0, 0.65),
+    0 0 24px rgba(255, 0, 127, 0.4);
+}
+
+/* Retail Promo Sticker (สติกเกอร์โปรโมชั่นแนะนำสินค้าสุดคุ้ม สไตล์ร้านเทป/แผ่นเสียง) */
+.cassette-promo-sticker {
+  position: absolute;
+  top: -11px;
+  right: 12px;
+  z-index: 15;
+  transform: rotate(5deg);
+  background: linear-gradient(135deg, #ff007f 0%, #d9006c 100%);
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  box-shadow: 
+    0 6px 16px rgba(255, 0, 127, 0.55),
+    0 2px 4px rgba(0, 0, 0, 0.35);
+  border: 1.5px dashed rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.15;
+  pointer-events: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cassette-promo-sticker .sticker-tag {
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.cassette-promo-sticker .sticker-sub {
+  font-family: 'IBM Plex Sans Thai', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #ffe4f0;
+  letter-spacing: 0.02em;
+}
+
+.cassette-package-card:hover .cassette-promo-sticker {
+  transform: rotate(7deg) scale(1.08);
+  box-shadow: 0 8px 22px rgba(255, 0, 127, 0.75);
+}
+
+.cassette-package-card.filtered-out,
+.cassette-package-card[hidden] {
+  display: none !important;
+}
+
+/* 4 Corner Screws with Philips Slots */
+.c-screw {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #cbd5e1 50%, #64748b 90%, #334155 100%);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6), inset 0 0.5px 1px #ffffff;
+  z-index: 8;
+}
+
+.c-screw::before,
+.c-screw::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: #334155;
+  transform: translate(-50%, -50%);
+}
+
+.c-screw::before {
+  width: 6px;
+  height: 1.2px;
+}
+
+.c-screw::after {
+  width: 1.2px;
+  height: 6px;
+}
+
+.c-screw-tl { top: 7px; left: 7px; }
+.c-screw-tr { top: 7px; right: 7px; }
+.c-screw-bl { bottom: 7px; left: 7px; }
+.c-screw-br { bottom: 7px; right: 7px; }
+
+/* Top Cassette Spine Bar (เรียบง่าย สะอาดตา ไม่แออัด) */
+.cassette-top-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px;
+  min-height: 22px;
+}
+
+.tape-badge {
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #475569;
+  letter-spacing: 0.08em;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.cassette-check-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: transparent;
+  color: transparent;
+  font-family: 'IBM Plex Sans Thai', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.cassette-package-card.active-pkg .cassette-check-indicator {
+  background: #ff007f;
+  color: #ffffff;
+  opacity: 1;
+  transform: scale(1);
+  box-shadow: 0 2px 8px rgba(255, 0, 127, 0.55);
+}
+
+/* ==========================================================================
+   RULED PAPER MIXTAPE LABEL (ป้ายสติกเกอร์กระดาษเขียนมือ)
+   ========================================================================== */
+.cassette-paper-label {
+  background-color: #fdfbf7;
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 18px,
+    rgba(148, 163, 184, 0.22) 18px,
+    rgba(148, 163, 184, 0.22) 19px
+  );
+  border: 1.5px solid #dcd5c7;
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.12);
+  color: #1e293b;
+}
+
+/* Racing Stripe across label */
+.cassette-racing-stripe {
+  display: flex;
+  height: 4px;
+  border-radius: 2px;
+  overflow: hidden;
+  gap: 2px;
+}
+
+.stripe-bar {
+  flex: 1;
+  height: 100%;
+}
+
+.stripe-bar.color-cyan { background: #00f0ff; }
+.stripe-bar.color-amber { background: #f59e0b; }
+.stripe-bar.color-pink { background: #ff007f; }
+.stripe-bar.color-gold { background: #eab308; }
+.stripe-bar.color-coral { background: #f97316; }
+.stripe-bar.color-blue { background: #0284c7; }
+.stripe-bar.color-dark { background: #0f172a; }
+
+/* Price Row (โดดเด่น คมชัด ตัวเลขชัดเจน) */
+.cassette-price-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  margin-top: -2px;
+}
+
+.cassette-price-tag {
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #0f172a;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.cassette-price-tag .cur {
+  font-size: 1.1rem;
+  color: #ff007f;
+  margin-right: 1px;
+  font-weight: 800;
+}
+
+.cassette-price-tag .suf {
+  font-size: 0.95rem;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.cassette-package-card.active-pkg .cassette-price-tag {
+  color: #ff007f;
+  text-shadow: 0 0 10px rgba(255, 0, 127, 0.35);
+}
+
+/* Package Title Prominent Font Size (เต็มความกว้าง โล่ง โปร่ง สบายตา) */
+.card-pkg-name {
+  font-family: 'IBM Plex Sans Thai', sans-serif;
+  font-size: 1.16rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 2px 0 6px 0;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  min-height: 2.6em;
+  display: flex;
+  align-items: center;
+}
+
+/* ==========================================================================
+   CASSETTE MAGNETIC TAPE WINDOW & SPOOLS
+   ========================================================================== */
+.cassette-window-box {
+  background: rgba(15, 23, 42, 0.92);
+  border: 1.5px solid #0f172a;
+  border-radius: 6px;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
+  height: 38px;
+}
+
+/* Spool Wheel */
+.tape-spool {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #cbd5e1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+  transition: transform 0.6s ease;
+}
+
+.cassette-package-card:hover .tape-spool {
+  transform: rotate(180deg);
+}
+
+.spool-cog {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #0f172a;
+  position: relative;
+}
+
+.spool-cog::before,
+.spool-cog::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: #ffffff;
+  transform: translate(-50%, -50%);
+}
+
+.spool-cog::before {
+  width: 14px;
+  height: 2px;
+}
+
+.spool-cog::after {
+  width: 2px;
+  height: 14px;
+}
+
+/* Tape Film Bridge */
+.tape-film-bridge {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  position: relative;
+}
+
+.tape-film-stripe {
+  width: 80%;
+  height: 10px;
+  background: linear-gradient(180deg, #422006 0%, #291203 100%);
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.tape-gauge-scale {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.52rem;
+  font-weight: 700;
+  color: #94a3b8;
+  letter-spacing: 0.1em;
+}
+
+/* ==========================================================================
+   MERCH / VALUE ITEMS INCLUDED (ป้ายสิทธิประโยชน์เด่นชัด ไม่รก ชวนซื้อ)
+   ========================================================================== */
+.cassette-item-list {
+  list-style: none;
+  margin: 0;
+  padding: 8px 0 0;
+  border-top: 1px dashed rgba(148, 163, 184, 0.45);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cassette-item-list li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'IBM Plex Sans Thai', sans-serif;
+  font-size: 0.78rem;
+  color: #334155;
+  line-height: 1.3;
+}
+
+.cassette-item-list li strong {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.item-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5px 6px;
+  border-radius: 4px;
+  font-family: 'IBM Plex Sans Thai', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1.25;
+}
+
+.item-tag.tag-ticket {
+  background: rgba(15, 23, 42, 0.08);
+  color: #1e293b;
+}
+
+.item-tag.tag-shirt {
+  background: rgba(255, 0, 127, 0.12);
+  color: #d9006c;
+  border: 1px solid rgba(255, 0, 127, 0.25);
+}
+
+.item-tag.tag-merch {
+  background: rgba(245, 158, 11, 0.15);
+  color: #b45309;
+}
+
+.item-tag.tag-delivery {
+  background: rgba(2, 132, 199, 0.14);
+  color: #0369a1;
+}
+
+.item-tag.tag-pickup {
+  background: rgba(249, 115, 22, 0.14);
+  color: #c2410c;
+}
+
+/* ==========================================================================
+   CASSETTE BOTTOM CHIN / TRAPEZOID
+   ========================================================================== */
+.cassette-chin-bottom {
+  margin: 2px auto 0;
+  width: 78%;
+  height: 12px;
+  background: rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 2px 2px 4px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 14px;
+}
+
+.chin-guide-hole {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.4);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.6);
+}
+
+.chin-head-slot {
+  width: 24px;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   SHIRT SIZE PICKER & MODAL FOOTER
+   ========================================================================== */
+.clean-size-picker {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.size-picker-label {
+  font-family: 'IBM Plex Sans Thai', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #00f0ff;
+  letter-spacing: 0.02em;
+}
+
+.size-btn-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.size-chip-btn {
+  padding: 7px 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  color: #e2e8f0;
+  font: 700 0.8rem 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.size-chip-btn:hover {
+  border-color: #ffe600;
+  background: rgba(255, 230, 0, 0.15);
+  color: #ffffff;
+}
+
+.size-chip-btn.active {
+  border-color: #ffe600;
+  background: #ffe600;
+  color: #0d061f;
+  box-shadow: 0 0 14px rgba(255, 230, 0, 0.55);
+}
+
+/* Modal Footer Bar */
+.pkg-dialog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  flex-wrap: wrap;
+}
+
+.footer-selection-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'IBM Plex Sans Thai', sans-serif;
+  font-size: 0.92rem;
+  flex-wrap: wrap;
+}
+
+.summary-label {
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+
+.summary-pkg-name {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.summary-pkg-price {
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  font-weight: 800;
+  color: #ffe600;
+  font-size: 1.15rem;
+}
+
+.footer-action-buttons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn-clean-cancel {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #94a3b8;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font: 600 0.86rem 'IBM Plex Sans Thai', sans-serif;
+  transition: all 0.18s ease;
+}
+
+.btn-clean-cancel:hover {
+  border-color: #f43f5e;
+  color: #f43f5e;
+}
+
+.btn-clean-proceed {
+  background: linear-gradient(135deg, #ff007f 0%, #bd00ff 100%);
+  border: none;
+  color: #ffffff;
+  padding: 10px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font: 700 0.92rem 'IBM Plex Sans Thai', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 18px rgba(255, 0, 127, 0.45);
+  transition: all 0.2s ease;
+}
+
+.btn-clean-proceed:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(255, 0, 127, 0.65);
+}
+
+.btn-clean-proceed:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   THAI TYPOGRAPHY & PREVENTING ORPHAN WORDS (ป้องกันคำตก คำลอย)
+   ========================================================================== */
+.pkg-header-title,
+.card-pkg-name,
+.cassette-item-list li,
+.pkg-header-role,
+.summary-pkg-name {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  text-wrap: pretty;
+}
+
+.brand-nowrap {
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.cassette-price-tag,
+.cassette-promo-sticker,
+.item-tag,
+.size-chip-btn,
+.summary-pkg-price,
+.tape-badge {
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   MOBILE & TABLET RESPONSIVENESS (ออกแบบพิเศษสำหรับมือถือทุกขนาดหน้าจอ)
+   ========================================================================== */
+
+/* Tablets / Medium Screens (<= 920px) */
+@media (max-width: 920px) {
+  .cassette-deck-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+/* Mobile Screens (<= 680px) */
+@media (max-width: 680px) {
+  .package-select-modal-backdrop {
+    padding: max(10px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right))
+             max(16px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
+    align-items: flex-start;
+  }
+
+  .pkg-dialog-container {
+    width: 100%;
+    max-width: 520px;
+    max-height: calc(100dvh - 20px);
+    padding: 16px 13px 18px 13px;
+    gap: 12px;
+    border-radius: 16px;
+    border-width: 1.5px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85);
+  }
+
+  /* Modal Header */
+  .pkg-dialog-header {
+    padding-bottom: 10px;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .pkg-header-title {
+    font-size: clamp(1.22rem, 5.2vw, 1.45rem);
+    line-height: 1.25;
+    text-wrap: balance;
+  }
+
+  .pkg-header-role {
+    font-size: 0.8rem;
+    line-height: 1.35;
+  }
+
+  .pkg-close-btn {
+    min-width: 38px;
+    min-height: 38px;
+    padding: 6px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  /* 1-Column Cassette Deck */
+  .cassette-deck-grid {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+
+  /* Cassette Card on Mobile */
+  .cassette-package-card {
+    padding: 11px 11px 13px 11px;
+    border-radius: 12px;
+    gap: 7px;
+    touch-action: manipulation;
+  }
+
+  /* Disable disruptive hover transforms on touch screens */
+  .cassette-package-card:hover {
+    transform: none;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.6);
+  }
+
+  .cassette-package-card.active-pkg {
+    transform: translateY(-2px);
+    box-shadow: 
+      0 14px 28px rgba(0, 0, 0, 0.75),
+      0 0 20px rgba(255, 0, 127, 0.5);
+  }
+
+  /* Screws adjusted for smaller cards */
+  .c-screw {
+    width: 8px;
+    height: 8px;
+  }
+  .c-screw::before { width: 5px; height: 1px; }
+  .c-screw::after { width: 1px; height: 5px; }
+  .c-screw-tl { top: 6px; left: 6px; }
+  .c-screw-tr { top: 6px; right: 6px; }
+  .c-screw-bl { bottom: 6px; left: 6px; }
+  .c-screw-br { bottom: 6px; right: 6px; }
+
+  /* Top Spine */
+  .cassette-top-strip {
+    min-height: 20px;
+    padding: 0 2px;
+  }
+
+  .tape-badge {
+    font-size: 0.62rem;
+    padding: 1.5px 6px;
+    border-radius: 3px;
+  }
+
+  .cassette-check-indicator {
+    font-size: 0.62rem;
+    padding: 2px 7px;
+  }
+
+  /* Retail Promo Sticker */
+  .cassette-promo-sticker {
+    top: -9px;
+    right: 8px;
+    padding: 3px 8px;
+    border-radius: 5px;
+    border-width: 1px;
+    transform: rotate(4deg);
+  }
+
+  .cassette-promo-sticker .sticker-tag {
+    font-size: 0.62rem;
+    letter-spacing: 0.05em;
+  }
+
+  .cassette-promo-sticker .sticker-sub {
+    font-size: 0.55rem;
+  }
+
+  /* Paper Label */
+  .cassette-paper-label {
+    padding: 10px 11px;
+    gap: 6px;
+    border-radius: 6px;
+  }
+
+  .cassette-racing-stripe {
+    height: 3px;
+  }
+
+  /* Price */
+  .cassette-price-row {
+    margin-top: -3px;
+  }
+
+  .cassette-price-tag {
+    font-size: 1.55rem;
+  }
+
+  .cassette-price-tag .cur {
+    font-size: 0.95rem;
+  }
+
+  .cassette-price-tag .suf {
+    font-size: 0.82rem;
+  }
+
+  /* Card Name */
+  .card-pkg-name {
+    font-size: 1.05rem;
+    line-height: 1.35;
+    min-height: auto;
+    margin: 1px 0 5px 0;
+  }
+
+  /* Compact Spools on Mobile */
+  .cassette-window-box {
+    height: 28px;
+    padding: 4px 8px;
+  }
+
+  .tape-spool {
+    width: 20px;
+    height: 20px;
+  }
+
+  .spool-cog {
+    width: 8px;
+    height: 8px;
+  }
+  .spool-cog::before { width: 11px; height: 1.5px; }
+  .spool-cog::after { width: 1.5px; height: 11px; }
+
+  .tape-film-stripe {
+    height: 7px;
+  }
+
+  .tape-gauge-scale {
+    font-size: 0.45rem;
+  }
+
+  /* Items Included */
+  .cassette-item-list {
+    padding-top: 6px;
+    gap: 5px;
+  }
+
+  .cassette-item-list li {
+    font-size: 0.74rem;
+    line-height: 1.35;
+    gap: 6px;
+  }
+
+  .item-tag {
+    font-size: 0.62rem;
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  /* Chin */
+  .cassette-chin-bottom {
+    height: 9px;
+    width: 72%;
+    margin-top: 1px;
+  }
+  .chin-guide-hole { width: 4px; height: 4px; }
+  .chin-head-slot { width: 20px; height: 3px; }
+
+  /* Size Picker */
+  .clean-size-picker {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .size-picker-label {
+    font-size: 0.82rem;
+    color: #e2e8f0;
+  }
+
+  .size-btn-group {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .size-chip-btn {
+    flex: 1 1 calc(20% - 6px);
+    min-width: 52px;
+    min-height: 38px;
+    padding: 6px 4px;
+    font-size: 0.76rem;
+    text-align: center;
+    border-radius: 6px;
+  }
+
+  /* Footer */
+  .pkg-dialog-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding-top: 12px;
+  }
+
+  .footer-selection-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+    width: 100%;
+  }
+
+  .summary-label {
+    font-size: 0.75rem;
+    color: #94a3b8;
+  }
+
+  .summary-pkg-name {
+    font-size: 0.92rem;
+    color: #ffffff;
+  }
+
+  .summary-pkg-price {
+    font-size: 1.25rem;
+    font-weight: 900;
+  }
+
+  .footer-action-buttons {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .btn-clean-cancel {
+    flex: 1;
+    min-height: 44px;
+    font-size: 0.88rem;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-clean-proceed {
+    flex: 2;
+    min-height: 44px;
+    font-size: 0.92rem;
+    font-weight: 800;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+}
+
+/* Extra Small Phones (<= 380px, e.g. iPhone SE, หน้าจอแคบ) */
+@media (max-width: 380px) {
+  .pkg-dialog-container {
+    padding: 12px 9px 14px 9px;
+    gap: 10px;
+    border-radius: 12px;
+  }
+
+  .pkg-header-title {
+    font-size: 1.15rem;
+  }
+
+  .pkg-header-role {
+    font-size: 0.75rem;
+  }
+
+  .cassette-package-card {
+    padding: 9px 9px 11px 9px;
+  }
+
+  .cassette-paper-label {
+    padding: 8px 9px;
+  }
+
+  .card-pkg-name {
+    font-size: 0.98rem;
+  }
+
+  .cassette-price-tag {
+    font-size: 1.45rem;
+  }
+
+  .cassette-item-list li {
+    font-size: 0.71rem;
+  }
+
+  .size-chip-btn {
+    min-width: 44px;
+    font-size: 0.72rem;
+  }
+}

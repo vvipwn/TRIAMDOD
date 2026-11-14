@@ -1,0 +1,60 @@
+/* ==========================================================================
+   TRIAMDOD 10 CONCERT — Y2K Cyber Arcade & Electric Night Teaser Webpage
+   Theme: Cyber Arcade Night, Electric Pink, Radiant Yellow, Vivid Cyber Blue,
+          Liquid Chrome Typo, Starfield Atmosphere & 3D Runway Grid
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Deep Cyber Arcade & Y2K Midnight Base */
+  --bg-color: #080318;
+  --bg-color-alt: #0e0526;
+  --bg-arcade-surface: #140933;
+  --text-main: #f8f9fe;
+  --text-muted: #b4abd2;
+  --text-subtle: #74679c;
+  
+  --font-serif: 'Italiana', 'Cinzel', 'Instrument Serif', 'IBM Plex Sans Thai', Georgia, serif;
+  --font-thai: 'IBM Plex Sans Thai', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Sukhumvit Set', sans-serif;
+  --font-y2k: 'Space Grotesk', 'IBM Plex Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-osd: 'VT323', 'IBM Plex Sans Thai', monospace;
+  --font-pridi: 'Pridi', 'IBM Plex Sans Thai', serif;
+  --font-swash: 'Pinyon Script', 'Alex Brush', cursive;
+
+  /* Y2K & Arcade Electric Palette (ตาม Reference Image: Message Festival & Y2K Energy) */
+  --accent-pink: #ff007f;           /* Neon Hot Pink / Bubblegum Fuchsia */
+  --accent-pink-hot: #ff1493;       /* Deep Vibrant Electric Magenta */
+  --accent-pink-glow: rgba(255, 0, 127, 0.65);
+  --accent-pink-glow-strong: rgba(255, 20, 147, 0.85);
+
+  --accent-yellow: #ffe600;         /* Electric Arcade Yellow / Neon Gold */
+  --accent-yellow-light: #fffb77;
+  --accent-yellow-glow: rgba(255, 230, 0, 0.6);
+
+  --accent-cyan: #00f0ff;           /* Vivid Cyber Blue / Electric Aqua */
+  --accent-cyan-deep: #00b8ff;
+  --accent-cyan-glow: rgba(0, 240, 255, 0.65);
+
+  --accent-purple: #bd00ff;         /* Cosmic Violet / Deep Cyber Purple */
+  --accent-purple-glow: rgba(189, 0, 255, 0.55);
+
+  --accent-neon-green: #d4ff00;
+
+  /* Liquid Chrome & Metallic Y2K Gradients */
+  --chrome-silver-linear: linear-gradient(135deg, #ffffff 0%, #d8e5f2 25%, #8ba3c7 48%, #ffffff 52%, #4a6382 78%, #ffffff 100%);
+  --chrome-bevel-border: 1.5px solid rgba(255, 255, 255, 0.45);
+  --arcade-neon-border-pink: 0 0 14px rgba(255, 0, 127, 0.5);
+  --arcade-neon-border-cyan: 0 0 14px rgba(0, 240, 255, 0.5);
+  --arcade-neon-border-yellow: 0 0 14px rgba(255, 230, 0, 0.5);
+
+  --crt-glow: rgba(0, 240, 255, 0.28);
+
+  /* Hyper-Realistic Nokia 3310 Colors */
+  --nokia-shell-top: #2c3349;
+  --nokia-shell-mid: #1c2132;
+  --nokia-shell-bottom: #121520;
+  --nokia-faceplate-rim: #454d66;
+  --nokia-lcd-bg: #879e67;
+  --nokia-lcd-text: #192314;
+}
